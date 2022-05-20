@@ -23,7 +23,7 @@ public class StockServiceImpl implements StockService {
     public void update() {
         //　あくまでトランザクション確認用のメソッドです。
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW); //新規トランザクションを開始
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
         def.setIsolationLevel(TransactionDefinition.ISOLATION_DEFAULT);
         def.setTimeout(10);
         def.setReadOnly(false);
