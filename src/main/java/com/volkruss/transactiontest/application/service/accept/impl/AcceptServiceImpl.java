@@ -54,7 +54,7 @@ public class AcceptServiceImpl implements AcceptService {
             // 在庫の整合性を確認する
             if(stock.isMinus()){
                 // 適当な例外投げてます
-                throw new Exception();
+                throw new RuntimeException();
             }
             // 在庫の更新をする
             this.stockRepository.save(stock);
