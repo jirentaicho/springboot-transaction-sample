@@ -9,6 +9,8 @@ import com.volkruss.transactiontest.domain.repository.item.ItemRepository;
 import com.volkruss.transactiontest.domain.repository.stock.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -24,7 +26,12 @@ public class AcceptServiceImpl implements AcceptService {
     private StockRepository stockRepository;
 
     @Override
-    @Transactional
+    @Transactional(
+            propagation = Propagation.REQUIRED,
+            isolation = Isolation.DEFAULT,
+            timeout = 10,
+            readOnly = false
+    )
     public void createAccept(AcceptController.RegistAcceptModel model) throws Exception {
         // ドメインモデルの作成
         Accept accept = new Accept(model.itemId, model.customerName, model.count);
