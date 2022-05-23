@@ -1,1 +1,5 @@
 rootProject.name = 'transactiontest'
+include 'groovy'
+include 'src:groovy'
+findProject(':src:groovy')?.name = 'groovy'
+

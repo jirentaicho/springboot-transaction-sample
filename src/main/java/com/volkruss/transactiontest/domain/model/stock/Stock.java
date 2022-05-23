@@ -12,11 +12,10 @@ public class Stock {
     private final int itemId;
     // そのままintを定義しています
     private int count;
-
+    public void addCount(int add) { this.count += add; }
     public void subCount(int sub){
         this.count -= sub;
     }
-
     public boolean isMinus(){
         return 0 > this.count;
     }
