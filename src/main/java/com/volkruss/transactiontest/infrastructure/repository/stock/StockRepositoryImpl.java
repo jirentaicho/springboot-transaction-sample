@@ -18,7 +18,6 @@ public class StockRepositoryImpl implements StockRepository {
         StockEntity stockEntity = this.jpaStockDao.findByItemId(itemId);
         Stock stock = new Stock(stockEntity.getId(),stockEntity.getItem_id(),stockEntity.getCount());
         return stock;
-
     }
 
     @Override
