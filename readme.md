@@ -41,3 +41,13 @@ EntityModel(取得) → ドメインオブジェクト → EntityModel(更新)
 
 * newしたEntityModelを更新する際にはmergeを行ってます
   * BaseDao#update参照
+
+
+## flyway
+
+* 依存の追加
+  * build.gradle参照
+* application.yamlの修正
+* resources/db/migration
+  * V__1_hoge_fuga.sql
+  * R__1_fuga_hoge.sql

@@ -4,3 +4,7 @@ spring:
     url: jdbc:postgresql://192.168.11.13:5432/school
     username: kakine
     password: teitoku
+  flyway:
+    enable: true
+    baseline-on-migrate: true # 既にテーブルがあるデータベースでもマイグレーションを実行する
+    baseline-version: 0 # flyway_schema_historyの初期バージョン番号を指定
