@@ -48,6 +48,18 @@ public class StockRepositoryImpl implements StockRepository {
         return new Stock(stockEntity.getId(),stockEntity.getItem_id(),stockEntity.getCount());
     }
 
+    @Override
+    public Stock update(Stock stock) {
+        // TODO mapperの作成
+        StockEntity stockEntity = new StockEntity();
+        stockEntity.setId(stock.getId());
+        stockEntity.setItem_id(stock.getItemId());
+        stockEntity.setCount(stock.getCount());
+        this.jpaStockDao.update(stockEntity);
+        return new Stock(stockEntity.getId(),stockEntity.getItem_id(),stockEntity.getCount());
+
+    }
+
     // TODO createMapper
     private Stock toStock(StockEntity stockEntity){
         return new Stock(

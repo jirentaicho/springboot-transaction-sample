@@ -27,7 +27,9 @@ public abstract class BaseDao<T extends BaseEntity> {
     }
 
     // 基本的にはEntityをnewしているので一度mergeします
-    public final void update(T t){
+    public final T update(T t){
         this.em.persist(this.em.merge(t));
+        // this.em.refresh(t);
+        return t;
     }
 }

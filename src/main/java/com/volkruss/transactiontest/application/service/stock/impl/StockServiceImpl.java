@@ -38,9 +38,11 @@ public class StockServiceImpl implements StockService {
         return this.toOut(this.stockRepository.save(stock));
     }
 
+    @Transactional
     @Override
-    public void update() {
-
+    public StockOut update(StockRequest request) {
+        Stock stock = new Stock(request.getId(),request.getItemId(),request.getCount());
+        return this.toOut(this.stockRepository.update(stock));
     }
 
     // TODO createMapper

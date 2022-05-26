@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class StockRequest {
+    public int id;
     @NotNull
     public int itemId;
     @NotNull

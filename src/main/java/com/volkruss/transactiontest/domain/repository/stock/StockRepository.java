@@ -11,4 +11,5 @@ public interface StockRepository {
     Stock find(StockCriteria criteria);
     Stock findStockByItemId(int itemId);
     Stock save(Stock stock);
+    Stock update(Stock stock);
 }

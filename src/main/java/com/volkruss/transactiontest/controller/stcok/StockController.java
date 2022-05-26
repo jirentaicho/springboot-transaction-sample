@@ -50,7 +50,6 @@ public class StockController {
         return apiResource;
     }
 
-
     // 単項目チェックを行う
     @PostMapping("/stock/register")
     public Resource create(@Validated @RequestBody StockRequest request, Errors errors){
@@ -58,7 +57,23 @@ public class StockController {
             // TODO エラー処理
             System.out.println("エラーがあります");
         }
+        // TODO updateでもおそらくinserOrUpdateなのでRepositoryの処理を統一できると思う
         StockOut stockOut = this.stockService.create(request);
+        // TODO createFactory
+        ApiResource apiResource = new ApiResource();
+        apiResource.setResultDate(List.of(stockOut));
+        apiResource.setMessage("成功");
+        return apiResource;
+    }
+
+    // TODO コントローラーを分割するかApiResourceの作成処理を抽出する
+    @PostMapping("/stock/update")
+    public Resource update(@Validated @RequestBody StockRequest request, Errors errors){
+        if(errors.hasErrors()){
+            // TODO エラー処理
+            System.out.println("エラーがあります");
+        }
+        StockOut stockOut = this.stockService.update(request);
         // TODO createFactory
         ApiResource apiResource = new ApiResource();
         apiResource.setResultDate(List.of(stockOut));
@@ -74,8 +89,4 @@ public class StockController {
 
         return "在庫更新完了";
     }
-
-
-
-
 }
