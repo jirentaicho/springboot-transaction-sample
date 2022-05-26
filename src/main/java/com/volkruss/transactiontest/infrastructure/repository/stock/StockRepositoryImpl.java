@@ -24,6 +24,12 @@ public class StockRepositoryImpl implements StockRepository {
     }
 
     @Override
+    public Stock find(StockCriteria criteria) {
+        StockEntity stockEntity = (StockEntity) this.jpaStockDao.find(StockEntity.class,criteria.getId());
+        return this.toStock(stockEntity);
+    }
+
+    @Override
     public Stock findStockByItemId(int itemId) {
         StockEntity stockEntity = this.jpaStockDao.findByItemId(itemId);
         Stock stock = new Stock(stockEntity.getId(),stockEntity.getItem_id(),stockEntity.getCount());

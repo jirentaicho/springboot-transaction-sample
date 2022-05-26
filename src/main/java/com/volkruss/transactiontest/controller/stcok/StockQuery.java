@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StockQuery {
+    private int id;
     private int itemId;
     private int count;
 }

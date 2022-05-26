@@ -15,6 +15,10 @@ public abstract class BaseDao<T extends BaseEntity> {
     @PersistenceContext
     protected EntityManager em;
 
+    public final T find(Class<T> clazz, int id){
+        return this.em.find(clazz,id);
+    }
+
     public final T save(T t) {
         this.em.persist(t);
         // 引数のEntity自体を破壊的に更新します

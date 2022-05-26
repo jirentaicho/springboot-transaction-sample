@@ -6,16 +6,15 @@ import com.volkruss.transactiontest.controller.ApiResource;
 import com.volkruss.transactiontest.controller.Resource;
 import com.volkruss.transactiontest.domain.dto.stock.StockCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class StockController {
 
     @Autowired
@@ -35,8 +34,20 @@ public class StockController {
     }
 
     //　1件の取得
-    public Resource show(StockQuery stockQuery){
-        return null;
+    @GetMapping("/stock/show/{id}")
+    public Resource show(@PathVariable int id){
+        // TODO この辺は見直し
+        StockQuery query = new StockQuery();
+        query.setId(id);
+        // QueryをCriteriaに変換する
+        StockCriteria criteria = StockMapper.toCriteria(query);
+        StockOut stockOut = stockService.show(criteria);
+        // 返却用リソースモデルに変換して返します
+        // TODO factoryを利用します
+        ApiResource apiResource = new ApiResource();
+        apiResource.setResultDate(List.of(stockOut));
+        apiResource.setMessage("成功");
+        return apiResource;
     }
 
 

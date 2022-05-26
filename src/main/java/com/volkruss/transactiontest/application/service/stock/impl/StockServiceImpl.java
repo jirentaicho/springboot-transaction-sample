@@ -25,6 +25,11 @@ public class StockServiceImpl implements StockService {
         return stocks.stream().map(this::toOut).collect(Collectors.toList());
     }
 
+    @Override
+    public StockOut show(StockCriteria criteria) {
+        return this.toOut(this.stockRepository.find(criteria));
+    }
+
     @Transactional
     @Override
     public StockOut create(StockRequest request) {
