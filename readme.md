@@ -43,6 +43,7 @@ EntityModel(取得) → ドメインオブジェクト → EntityModel(更新)
   * BaseDao#update参照
 
 
+<<<<<<< HEAD
 ## バリデーション
 
 依存
@@ -95,3 +96,12 @@ implementation 'org.springframework.boot:spring-boot-starter-validation'
   * 単項目チェックをするためにアノテーションを付与しておく
 * サービスクラスにrequestを渡してStockOutを得る
 * GETと同様にResourceを作製して返却する
+
+## flyway
+
+* 依存の追加
+  * build.gradle参照
+* application.yamlの修正
+* resources/db/migration
+  * V1__hoge_fuga.sql
+  * R__1_fuga_hoge.sql
