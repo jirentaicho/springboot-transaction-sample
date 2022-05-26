@@ -9,5 +9,5 @@ import java.util.List;
 public interface StockRepository {
     List<Stock> findAll(StockCriteria criteria);
     Stock findStockByItemId(int itemId);
-    void save(Stock stock);
+    Stock save(Stock stock);
 }

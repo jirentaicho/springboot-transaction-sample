@@ -32,13 +32,14 @@ public class StockRepositoryImpl implements StockRepository {
     }
 
     @Override
-    public void save(Stock stock) {
+    public Stock save(Stock stock) {
         // データベース用のオブジェクトに変換します
         StockEntity stockEntity = new StockEntity();
         stockEntity.setId(stock.getId());
         stockEntity.setItem_id(stock.getItemId());
         stockEntity.setCount(stock.getCount());
-        this.jpaStockDao.update(stockEntity);
+        this.jpaStockDao.save(stockEntity);
+        return new Stock(stockEntity.getId(),stockEntity.getItem_id(),stockEntity.getCount());
     }
 
     // TODO createMapper

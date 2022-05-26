@@ -44,12 +44,14 @@ public class StockController {
     @PostMapping("/stock/register")
     public Resource create(@Validated @RequestBody StockRequest request, Errors errors){
         if(errors.hasErrors()){
+            // TODO エラー処理
             System.out.println("エラーがあります");
         }
         StockOut stockOut = this.stockService.create(request);
         // TODO createFactory
         ApiResource apiResource = new ApiResource();
         apiResource.setResultDate(List.of(stockOut));
+        apiResource.setMessage("成功");
         return apiResource;
     }
 

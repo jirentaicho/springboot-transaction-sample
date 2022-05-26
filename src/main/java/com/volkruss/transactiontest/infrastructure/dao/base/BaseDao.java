@@ -15,8 +15,11 @@ public abstract class BaseDao<T extends BaseEntity> {
     @PersistenceContext
     protected EntityManager em;
 
-    public final void save(T t) {
+    public final T save(T t) {
         this.em.persist(t);
+        // 引数のEntity自体を破壊的に更新します
+        this.em.refresh(t);
+        return t;
     }
 
     // 基本的にはEntityをnewしているので一度mergeします

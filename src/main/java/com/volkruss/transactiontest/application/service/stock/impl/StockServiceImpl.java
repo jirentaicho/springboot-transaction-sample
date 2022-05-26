@@ -9,6 +9,7 @@ import com.volkruss.transactiontest.domain.repository.stock.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,9 +25,12 @@ public class StockServiceImpl implements StockService {
         return stocks.stream().map(this::toOut).collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public StockOut create(StockRequest request) {
-        return null;
+        // id:0でもインサート時には自動採番されます
+        Stock stock = new Stock(0,request.itemId,request.getCount());
+        return this.toOut(this.stockRepository.save(stock));
     }
 
     @Override

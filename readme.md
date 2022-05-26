@@ -87,3 +87,11 @@ implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 * GetでもPostでも基本はResourceインターフェースの実装を返却する
   * 返却モデル(OutDto)とMessageを格納したオブジェクトです
+
+## Stock追加機能追加
+
+* Requestクラスの作成
+  * StockRequest
+  * 単項目チェックをするためにアノテーションを付与しておく
+* サービスクラスにrequestを渡してStockOutを得る
+* GETと同様にResourceを作製して返却する
