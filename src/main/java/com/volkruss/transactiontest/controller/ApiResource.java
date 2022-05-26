@@ -4,6 +4,7 @@ import com.volkruss.transactiontest.application.service.OutDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ApiResource implements Resource{
@@ -18,7 +19,15 @@ public class ApiResource implements Resource{
         this.result = list;
     }
 
+    /**
+     * 例えば、削除してここがnullの場合例外発生します
+     * getDataがJsonオブジェクトとして返す時に呼ばれているから
+     * @return
+     */
     public List<? extends OutDto> getData(){
+        if(Objects.isNull(this.result)){
+            return this.result;
+        }
         return this.result.stream().collect(Collectors.toList());
     }
 

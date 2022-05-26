@@ -12,4 +12,5 @@ public interface StockRepository {
     Stock findStockByItemId(int itemId);
     Stock save(Stock stock);
     Stock update(Stock stock);
+    void delete(Stock stock);
 }

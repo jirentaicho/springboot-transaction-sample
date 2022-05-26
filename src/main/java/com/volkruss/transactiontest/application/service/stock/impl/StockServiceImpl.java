@@ -27,6 +27,7 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public StockOut show(StockCriteria criteria) {
+        // 扱いが難しい
         return this.toOut(this.stockRepository.find(criteria));
     }
 
@@ -41,8 +42,18 @@ public class StockServiceImpl implements StockService {
     @Transactional
     @Override
     public StockOut update(StockRequest request) {
+        // TODO findして取得する
         Stock stock = new Stock(request.getId(),request.getItemId(),request.getCount());
         return this.toOut(this.stockRepository.update(stock));
+    }
+
+    @Transactional
+    @Override
+    public void delete(StockRequest request) {
+        StockCriteria criteria = new StockCriteria();
+        criteria.setId(request.getId());
+        Stock stock = this.stockRepository.find(criteria);
+        this.stockRepository.delete(stock);
     }
 
     // TODO createMapper
