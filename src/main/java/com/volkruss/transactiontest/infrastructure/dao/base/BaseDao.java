@@ -32,4 +32,8 @@ public abstract class BaseDao<T extends BaseEntity> {
         // this.em.refresh(t);
         return t;
     }
+
+    public final void delete(T t){
+        this.em.remove(this.em.merge(t));
+    }
 }

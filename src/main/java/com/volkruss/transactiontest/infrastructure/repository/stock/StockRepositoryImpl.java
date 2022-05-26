@@ -60,6 +60,15 @@ public class StockRepositoryImpl implements StockRepository {
 
     }
 
+    @Override
+    public void delete(Stock stock) {
+        StockEntity stockEntity = new StockEntity();
+        stockEntity.setId(stock.getId());
+        stockEntity.setItem_id(stock.getItemId());
+        stockEntity.setCount(stock.getCount());
+        this.jpaStockDao.delete(stockEntity);
+    }
+
     // TODO createMapper
     private Stock toStock(StockEntity stockEntity){
         return new Stock(

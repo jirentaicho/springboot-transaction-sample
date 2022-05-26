@@ -81,6 +81,19 @@ public class StockController {
         return apiResource;
     }
 
+    @PostMapping("/stock/delete")
+    public Resource delete(@Validated @RequestBody StockRequest request, Errors errors){
+        if(errors.hasErrors()){
+            // TODO エラー処理
+            System.out.println("エラーがあります");
+        }
+        this.stockService.delete(request);
+        // TODO createFactory
+        ApiResource apiResource = new ApiResource();
+        apiResource.setMessage("成功");
+        return apiResource;
+    }
+
     // AcceptControllerと同様で、あくまでテスト用でGETメソッドになっています。
     @GetMapping("/test/stock")
     public String test(){

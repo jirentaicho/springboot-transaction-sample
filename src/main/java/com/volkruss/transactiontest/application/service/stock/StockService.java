@@ -10,5 +10,6 @@ public interface StockService {
     StockOut show(StockCriteria criteria);
     StockOut create(StockRequest request);
     StockOut update(StockRequest request);
+    void delete(StockRequest request);
 }
 
