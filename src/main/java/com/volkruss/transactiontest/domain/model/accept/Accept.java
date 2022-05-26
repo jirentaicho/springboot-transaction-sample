@@ -12,4 +12,5 @@ public class Accept {
     private final String customerName;
     private int count;
 
+
 }
