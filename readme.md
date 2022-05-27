@@ -42,8 +42,6 @@ EntityModel(取得) → ドメインオブジェクト → EntityModel(更新)
 * newしたEntityModelを更新する際にはmergeを行ってます
   * BaseDao#update参照
 
-
-<<<<<<< HEAD
 ## バリデーション
 
 依存
@@ -63,6 +61,8 @@ implementation 'org.springframework.boot:spring-boot-starter-validation'
   * ....................................工事中....
 
 # Stock検索機能を追加する
+
+今回のStockはマイナス在庫を許さないことにしています
 
 * StockQueryクラスの作成
   * 検索に必要な条件を持っています
@@ -97,6 +97,17 @@ implementation 'org.springframework.boot:spring-boot-starter-validation'
 * サービスクラスにrequestを渡してStockOutを得る
 * GETと同様にResourceを作製して返却する
 
+## 相関チェック
+
+順序
+
+1. バリデータークラス(Validatorの実装クラス)の作成
+2. エラーメッセージはメッセージファイルなどに定義する
+3. InitBinderにてバリデータークラスをWebDataBinderに登録する
+4. 引数はErrorsが入ったBindingResultを利用する
+
+
+
 ## flyway
 
 * 依存の追加
@@ -105,3 +116,5 @@ implementation 'org.springframework.boot:spring-boot-starter-validation'
 * resources/db/migration
   * V1__hoge_fuga.sql
   * R__1_fuga_hoge.sql
+
+

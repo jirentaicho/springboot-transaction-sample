@@ -13,6 +13,7 @@ import java.util.Optional;
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class StockReferenceController extends StockController{
 
+
     @GetMapping("/stock/index")
     public Resource index(StockQuery stockQuery){
         // QueryをCriteriaに変換する
