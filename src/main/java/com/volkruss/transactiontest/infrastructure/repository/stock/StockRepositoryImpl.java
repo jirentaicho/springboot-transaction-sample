@@ -40,21 +40,14 @@ public class StockRepositoryImpl implements StockRepository {
     @Override
     public Stock save(Stock stock) {
         // データベース用のオブジェクトに変換します
-        StockEntity stockEntity = new StockEntity();
-        stockEntity.setId(stock.getId());
-        stockEntity.setItem_id(stock.getItemId());
-        stockEntity.setCount(stock.getCount());
+        StockEntity stockEntity = this.toEntity(stock);
         this.jpaStockDao.save(stockEntity);
         return new Stock(stockEntity.getId(),stockEntity.getItem_id(),stockEntity.getCount());
     }
 
     @Override
     public Stock update(Stock stock) {
-        // TODO mapperの作成
-        StockEntity stockEntity = new StockEntity();
-        stockEntity.setId(stock.getId());
-        stockEntity.setItem_id(stock.getItemId());
-        stockEntity.setCount(stock.getCount());
+        StockEntity stockEntity = this.toEntity(stock);
         this.jpaStockDao.update(stockEntity);
         return new Stock(stockEntity.getId(),stockEntity.getItem_id(),stockEntity.getCount());
 
@@ -62,11 +55,17 @@ public class StockRepositoryImpl implements StockRepository {
 
     @Override
     public void delete(Stock stock) {
-        StockEntity stockEntity = new StockEntity();
-        stockEntity.setId(stock.getId());
-        stockEntity.setItem_id(stock.getItemId());
-        stockEntity.setCount(stock.getCount());
+        StockEntity stockEntity = this.toEntity(stock);
         this.jpaStockDao.delete(stockEntity);
+    }
+
+
+    private StockEntity toEntity(Stock stock){
+        StockEntity entity = new StockEntity();
+        entity.setId(stock.getId());
+        entity.setItem_id(stock.getItemId());
+        entity.setCount(stock.getCount());
+        return entity;
     }
 
     // TODO createMapper
