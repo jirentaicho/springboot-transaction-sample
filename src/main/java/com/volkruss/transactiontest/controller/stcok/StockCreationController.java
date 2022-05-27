@@ -2,6 +2,7 @@ package com.volkruss.transactiontest.controller.stcok;
 
 import com.volkruss.transactiontest.application.service.stock.StockOut;
 import com.volkruss.transactiontest.controller.Resource;
+import com.volkruss.transactiontest.domain.exception.ValidationException;
 import com.volkruss.transactiontest.domain.validator.stock.StockRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -32,17 +33,12 @@ public class StockCreationController extends StockController {
         binder.addValidators(stockRequestValidator);
     }
 
-    // 単項目チェックを行う
+    // 相関項目チェックを行う
     @PostMapping("/stock/register")
     public Resource create(@Validated @RequestBody StockRequest request, BindingResult errors){
         if(errors.hasErrors()){
-           errors.getFieldErrors()
-                   .forEach(e -> {
-                       // System.out.println(e.getField() + " : " + e.getDefaultMessage() + " : " + e.getCode());
-                       // itemId : null : stock.test
-                       // code 埋め込み文字列の配列　ロケール
-                       System.out.println(this.messageSource.getMessage(e.getCode(),new String[]{}, null));
-                   });
+            // この例外を投げるとAdviceの処理が発火します
+            throw new ValidationException(errors);
         }
         // TODO updateでもおそらくinserOrUpdateなのでRepositoryの処理を統一できると思う
         StockOut stockOut = this.stockService.create(request);
