@@ -106,7 +106,30 @@ implementation 'org.springframework.boot:spring-boot-starter-validation'
 3. InitBinderにてバリデータークラスをWebDataBinderに登録する
 4. 引数はErrorsが入ったBindingResultを利用する
 
+## エラー処理
 
+以下の場合にエラー処理を発生させる(例外)
+
+* バリデーション
+* ドメインルールのチェック
+
+エラーを横断的関事としてAOPにて捌きます
+
+順序
+
+1. RuntimeExceptionを継承したエラーを作成する(トランザクションでロールバックさせるため)
+2. RestControllerAdviceアノテーションを付ける。ResponseEntityExceptionHandlerを継承する。
+3. @ExceptionHandlerに1.で作成したクラスを指定する
+4. そこで例外クラスを処理できる
+5. Resourceを返却すればJSONとして取得できる
+
+その他
+
+* 例外クラス自体にErrorsを持たせることでAdviceから取得できるようにします
+* あとはRestControllerAdvice#@ExceptionHandlerのメソッドで例外クラスからErrorsを取得する
+
+
+[参考](https://volkruss.com/?p=1557)
 
 ## flyway
 
